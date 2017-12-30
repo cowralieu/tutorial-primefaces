@@ -30,6 +30,19 @@
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>file:///F:/myLogging.xml</param-value>
+    </context-param>
+
     <context-param>
         <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
         <param-value>0</param-value>
