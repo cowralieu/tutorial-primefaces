@@ -4,9 +4,10 @@ import com.cowralieu.tutorial.pf.service.HelloSpringService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import java.io.Serializable;
 
 @ManagedBean
-public class HelloController {
+public class HelloController implements Serializable {
 
     @ManagedProperty("#{hss}")
     private HelloSpringService helloSpringService;

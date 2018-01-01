@@ -58,4 +58,8 @@ public class CheckListController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Check removed!", null));
     }
+
+    public void clearEditForm() {
+        check = new Check();
+    }
 }
