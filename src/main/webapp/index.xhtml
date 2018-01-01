@@ -3,7 +3,47 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head></h:head>
 <h:body>
+    <!--<p:messages id="messages"/>-->
+    <p:growl id="messages" />
     managed bean says:
-    #{helloController.showHello()}
+    <h:outputText value="#{helloController.showHello()}" />
+
+
+    <p:dataTable value="#{checkListController.checks}" var="check" id="checkTable">
+        <p:column headerText="name">
+            <h:outputText value="#{check.name}" />
+        </p:column>
+        <p:column headerText="url">
+            <a href="#{check.url}" target="_blank"><h:outputText value="#{check.url}" /></a>
+        </p:column>
+        <p:column headerText="operations">
+            <h:form>
+                <p:commandButton value="Edit" action="#{checkListController.setCheck(check)}"
+                                 update=":checkForm"/>
+                <p:commandButton value="Delete" action="#{checkListController.remove(check)}"
+                                 update=":checkTable, :messages">
+                    <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                </p:commandButton>
+            </h:form>
+        </p:column>
+    </p:dataTable>
+
+    <h:form id="checkForm">
+        <p:focus/>
+        <p:panelGrid columns="2">
+            name:<p:inputText value="#{checkListController.check.name}"/>
+            url:<p:inputText value="#{checkListController.check.url}"/>
+        </p:panelGrid>
+        <p:commandButton value="save"
+                         action="#{checkListController.save()}"
+                         update="checkForm, :checkTable, :messages"/>
+    </h:form>
+
+    <h:form>
+        <p:confirmDialog global="true" closeOnEscape="true">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </p:confirmDialog>
+    </h:form>
 </h:body>
 </html>
